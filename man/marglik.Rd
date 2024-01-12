@@ -34,15 +34,29 @@ The marginal likelihood of the replication effect estimate.
 }
 \description{
 This function computes the marginal likelihood of the
-    replication effect estimate \code{tr} under a mixture prior for the
-    underlying effect size with one component being a normal distribution
-    with mean equal to the original effect estimate \code{to}, variance equal
-    to the squared original standard error \code{so^2}, and mixture weight
-    \code{w}, and the other component being a normal distribution with mean
-    \code{m}, variance \code{v}, and mixture weight 1 - \code{w}. The weight
-    \code{w} parameter can either be fixed to a value between zero and one,
-    or a beta prior \eqn{\code{w} \sim \text{Beta}(x,y)}{\code{w} ~ Beta(x,
-    y)} can be assigned to it.
+    replication data under a mixture prior that incorporates the original
+    data. See the details section for details regarding data model and prior
+    distributions.
+}
+\details{
+A normal likelihood around the underlying effect size \eqn{\theta}
+    is assumed for the effect estimate from the replication study
+\deqn{\code{tr} \mid \theta \sim \text{N}(\theta, \code{sr}^2)}{tr | theta ~
+    N(theta, sr^2)}
+
+    A mixture prior is assumed for the effect size \eqn{\theta} with one
+    component being a normal distribution with mean equal to the original
+    effect estimate \code{to}, variance equal to the squared original
+    standard error \code{so^2}, and mixture weight \code{w}, and the other
+    component being a normal distribution with mean \code{m}, variance
+    \code{v}, and mixture weight \eqn{1 - \code{w}}
+\deqn{\theta \mid w \sim \code{w} \times \text{N}(\code{to}, \code{so}^2) + (1 - \code{w})
+    \times \text{N}(\code{m}, \code{v})}{ theta | \code{w} ~ \code{w} * N(to, so^2) + (1 -
+    \code{w}) * N(m, v)}
+
+    The mixture weight \code{w} can either be fixed to a value between zero
+and one, or a Beta prior can be assumed for it
+\deqn{w \sim \text{Beta}(x, y)}{w ~ Beta(x, y)}
 }
 \examples{
 ## uniform prior specified for weight w

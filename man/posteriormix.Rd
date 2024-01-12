@@ -37,28 +37,28 @@ The posterior density for a pair of effect size and weight parameter.
 }
 \description{
 This function computes the posterior density of effect size and
-    weight parameter based on the data from original and replication study.
-    See the details section for details regarding data model and prior
-    distributions.
+    weight parameter based on the data from original and replication study
+    using a mixture prior to incorporate the original data into the analysis
+    of the replication data. See the details section for details regarding
+    data model and prior distributions.
 }
 \details{
 A normal likelihood around the underlying effect size \eqn{\theta}
     is assumed for the effect estimate from the replication study
-    \deqn{\code{tr} \mid \theta \sim \text{N}(\theta, \code{sr}^2)}{tr |
-    theta ~ N(theta, sr^2)}
+\deqn{\code{tr} \mid \theta \sim \text{N}(\theta, \code{sr}^2)}{tr | theta ~
+    N(theta, sr^2)}
 
-    A mixture prior is specified for the effect size \eqn{\theta} with one
+    A mixture prior is assumed for the effect size \eqn{\theta} with one
     component being a normal distribution with mean equal to the original
     effect estimate \code{to}, variance equal to the squared original
-    standard error \code{so^2}, and mixture weight \code{w}, and the other
+    standard error \code{so^2}, and mixture weight \eqn{w}, and the other
     component being a normal distribution with mean \code{m}, variance
-    \code{v}, and mixture weight 1 - \code{w}
-\deqn{\theta \mid w \sim w
-    \times \text{N}(\code{to}, \code{so}^2) + (1 - w) \times
-    \text{N}(\code{m}, \code{v})}{ theta | w ~ w * N(to, so^2) + (1 - w) *
-    N(m, v)}
+    \code{v}, and mixture weight \eqn{1 - w}
+\deqn{\theta \mid w \sim w \times \text{N}(\code{to}, \code{so}^2) + (1 - w)
+    \times \text{N}(\code{m}, \code{v})}{ theta | w ~ w * N(to, so^2) + (1 -
+    w) * N(m, v)}
 
-    A Beta prior is specified for the weight parameter
+    A Beta prior is assumed for the weight parameter
 \deqn{w \sim \text{Beta}(x, y)}{w ~ Beta(x, y)}
 }
 \examples{
