@@ -2,7 +2,7 @@
 % Please edit documentation in R/posterior.R
 \name{posteriormix}
 \alias{posteriormix}
-\title{Posterior density of effect size and weight parameter}
+\title{Joint posterior density of effect size and weight parameter}
 \usage{
 posteriormix(theta, w, tr, sr, to, so, x = 1, y = 1, m = 0, v = 1)
 }
@@ -33,7 +33,8 @@ Defaults to \code{1}.}
 \code{1}.}
 }
 \value{
-The posterior density for a pair of effect size and weight parameter.
+The joint posterior density for a pair of effect size and weight
+    parameter.
 }
 \description{
 This function computes the posterior density of effect size and
@@ -67,7 +68,7 @@ w <- seq(0, 1, length.out = 200)
 theta <- seq(0, 0.3, length.out = 200)
 parGrid <- expand.grid(w = w, theta = theta)
 postdens <- posteriormix(theta = parGrid$theta, w = parGrid$w, tr = 0.09,
-                    sr = 0.05, to = 0.2, so = 0.05, m = 0, v = 2)
+                         sr = 0.05, to = 0.2, so = 0.05, m = 0, v = 4)
 postdensMat <- matrix(data = postdens, ncol = 200, byrow = TRUE)
 filled.contour(x = theta, y = w, z = postdensMat,
                xlab = bquote("Effect size" ~ theta),

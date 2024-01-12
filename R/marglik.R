@@ -44,14 +44,14 @@
 #'
 #' @examples
 #' ## uniform prior specified for weight w
-#' marglik(tr = 0.09, sr = 0.05, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 2)
-#' marglik(tr = 0.21, sr = 0.06, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 2)
-#' marglik(tr = 0.44, sr = 0.04, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 2)
+#' marglik(tr = 0.09, sr = 0.05, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 4)
+#' marglik(tr = 0.21, sr = 0.06, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 4)
+#' marglik(tr = 0.44, sr = 0.04, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 4)
 #'
 #' ## fixed weight w = 0.5
-#' marglik(tr = 0.09, sr = 0.05, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 2)
-#' marglik(tr = 0.21, sr = 0.06, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 2)
-#' marglik(tr = 0.44, sr = 0.04, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 2)
+#' marglik(tr = 0.09, sr = 0.05, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 4)
+#' marglik(tr = 0.21, sr = 0.06, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 4)
+#' marglik(tr = 0.44, sr = 0.04, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 4)
 #'
 #' @export
 marglik <- function(tr, sr, to, so, w = NULL, x = 1, y = 1, m = 0, v = 1) {
@@ -84,12 +84,12 @@ marglik <- function(tr, sr, to, so, w = NULL, x = 1, y = 1, m = 0, v = 1) {
         length(x) == 1,
         is.numeric(x),
         is.finite(x),
-        0 <= x,
+        0 < x,
 
         length(y) == 1,
         is.numeric(y),
         is.finite(y),
-        0 <= y,
+        0 < y,
 
         length(m) == 1,
         is.numeric(m),

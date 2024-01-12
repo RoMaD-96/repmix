@@ -60,14 +60,14 @@ and one, or a Beta prior can be assumed for it
 }
 \examples{
 ## uniform prior specified for weight w
-marglik(tr = 0.09, sr = 0.05, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 2)
-marglik(tr = 0.21, sr = 0.06, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 2)
-marglik(tr = 0.44, sr = 0.04, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 2)
+marglik(tr = 0.09, sr = 0.05, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 4)
+marglik(tr = 0.21, sr = 0.06, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 4)
+marglik(tr = 0.44, sr = 0.04, to = 0.21, so = 0.05, x = 1, y = 1, m = 0, v = 4)
 
 ## fixed weight w = 0.5
-marglik(tr = 0.09, sr = 0.05, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 2)
-marglik(tr = 0.21, sr = 0.06, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 2)
-marglik(tr = 0.44, sr = 0.04, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 2)
+marglik(tr = 0.09, sr = 0.05, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 4)
+marglik(tr = 0.21, sr = 0.06, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 4)
+marglik(tr = 0.44, sr = 0.04, to = 0.21, so = 0.05, w = 0.2, m = 0, v = 4)
 
 }
 \author{
