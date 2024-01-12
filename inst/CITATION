@@ -1,0 +1,14 @@
+citHeader(paste("To cite the R-package 'ppRep' in publications,",
+                "please use:"))
+
+bibentry(bibtype = "Misc",
+         title = "Mixture priors for replication studies",
+         author = c(person(given = "Roberto", family = "Macri Demartino", role = "aut"),
+                    person(given = "Samuel", family = "Pawel", role = "aut")),
+         ## journal = "",
+         ## doi = "",
+         ## volume = "",
+         ## number = "",
+         ## pages = "",
+         year = "2024"
+         )
