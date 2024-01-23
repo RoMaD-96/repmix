@@ -356,11 +356,13 @@ thetaposteriormix <- function(theta, tr, sr, to, so, w = NULL, x = 1, y = 1,
 #' plot(NA, NA, type = "n", ylim = c(0, 0.3), xlim = c(-0.25, 1.25),
 #'      xlab = "Weight of original study",
 #'      ylab = "Posterior median with 95% HPDI", las = 1)
-#' arrows(x0 = w, y0 = HPDs[,1], y1 = HPDs[,3], code = 3, angle = 90, length = 0.05)
-#' points(x = w, y = HPDs[,2], pch = 20)
+#' arrows(x0 = w, y0 = HPDs[,1], y1 = HPDs[,3], code = 3, angle = 90, length = 0.05,
+#'        col = 4)
+#' points(x = w, y = HPDs[,2], pch = 20, col = 4)
 #' arrows(x0 = c(-0.2, 1.2), y0 = c(tr - 1.96*sr, to - 1.96*so),
-#'        y1 = c(tr + 1.96*sr, to + 1.96*so), code = 3, angle = 90, length = 0.05)
-#' points(x = c(-0.2, 1.2), y = c(tr, to), pch = 20)
+#'        y1 = c(tr + 1.96*sr, to + 1.96*so), code = 3, angle = 90, length = 0.05,
+#'        col = c(1, 2))
+#' points(x = c(-0.2, 1.2), y = c(tr, to), pch = 20, col = c(1, 2))
 #' axis(side = 1, at = c(-0.2, 1.2), labels = c("Replication", "Original"))
 #'
 #' @export
@@ -594,4 +596,147 @@ wposteriormix <- function(w, tr, sr, to, so, x = 1, y = 1, m = 0, v = 1) {
     ## compute marginal posterior density
     res <- prior * (w * lik1 + (1 - w) * lik2) / nc
     return(res)
+}
+
+
+#' @title Highest posterior density interval for effect size
+#'
+#' @description This function computes the highest posterior density interval
+#'     for the effect size based on the data from original and replication study
+#'     using a mixture prior to incorporate the original data into the analysis
+#'     of the replication data. See the details section for details regarding
+#'     data model and prior distributions.
+#'
+#' @details A normal likelihood around the underlying effect size \eqn{\theta}
+#'     is assumed for the effect estimate from the replication study
+#' \deqn{\code{tr} \mid \theta \sim \text{N}(\theta, \code{sr}^2)}{tr | theta ~
+#'     N(theta, sr^2)}
+#'
+#'     A mixture prior is assumed for the effect size \eqn{\theta} with one
+#'     component being a normal distribution with mean equal to the original
+#'     effect estimate \code{to}, variance equal to the squared original
+#'     standard error \code{so^2}, and mixture weight \eqn{w}, and the other
+#'     component being a normal distribution with mean \code{m}, variance
+#'     \code{v}, and mixture weight \eqn{1 - w}
+#' \deqn{\theta \mid w \sim w \times \text{N}(\code{to}, \code{so}^2) + (1 - w)
+#'     \times \text{N}(\code{m}, \code{v})}{ theta | w ~ w * N(to, so^2) + (1 -
+#'     w) * N(m, v)}
+#'
+#'     A Beta prior is assumed for the weight parameter \deqn{w \sim
+#' \text{Beta}(x, y)}{w ~ Beta(x, y)}
+#'
+#' @param level Credibility level. Defaults to \code{0.95}.
+#' @param tr Effect estimate from the replication study.
+#' @param sr Standard error of the replication effect estimate.
+#' @param to Effect estimate from the original study.
+#' @param so Standard error of the original effect estimate.
+#' @param x Number of successes parameter of the beta prior for \code{w}.
+#'     Defaults to \code{1}.
+#' @param y Number of failures parameter of the beta prior for \code{w}.
+#'     Defaults to \code{1}.
+#' @param m Mean parameter of the normal prior component. Defaults to \code{0}.
+#' @param v Variance parameter of the normal prior component. Defaults to
+#'     \code{1}.
+#'
+#' @return The highest posterior density interval at the specified credibility
+#'     level and posterior median for the mixture weight.
+#'
+#' @author Samuel Pawel, Roberto Macri Demmartino
+#'
+#' @examples
+#' wHPD(level = 0.95, tr = 0.09, sr = 0.05, to = 0.21, so = 0.05, x = 1, y = 1,
+#'       m = 0, v = 4)
+#' wHPD(level = 0.95, tr = 0.21, sr = 0.06, to = 0.21, so = 0.05, x = 1, y = 1,
+#'       m = 0, v = 4)
+#' wHPD(level = 0.95, tr = 0.44, sr = 0.04, to = 0.21, so = 0.05, x = 1, y = 1,
+#'       m = 0, v = 4)
+#'
+#' @export
+wHPD <- function(level = 0.95, tr, sr, to, so, x = 1, y = 1, m = 0, v = 1) {
+    ## input checks
+    stopifnot(
+        length(level) == 1,
+        is.numeric(level),
+        is.finite(level),
+        0 < level, level < 1,
+
+        length(tr) == 1,
+        is.numeric(tr),
+        is.finite(tr),
+
+        length(sr) == 1,
+        is.numeric(sr),
+        is.finite(sr),
+        0 < sr,
+
+        length(to) == 1,
+        is.numeric(to),
+        is.finite(to),
+
+        length(so) == 1,
+        is.numeric(so),
+        is.finite(so),
+        0 < so,
+
+        length(x) == 1,
+        is.numeric(x),
+        is.finite(x),
+        0 < x,
+
+        length(y) == 1,
+        is.numeric(y),
+        is.finite(y),
+        0 < y,
+
+        length(m) == 1,
+        is.numeric(m),
+        is.finite(m),
+
+        length(v) == 1,
+        is.numeric(v),
+        is.finite(v),
+        0 < v
+    )
+
+    ## CDF of the posterior
+    cdf <- function(w) {
+        res <- try(stats::integrate(f = wposteriormix, lower = 0, upper = w,
+                                    tr = tr, sr = sr, to = to, so = so, x = x,
+                                    y = y, m = m, v = v)$value)
+        if (inherits(res, "try-error")) return(NaN)
+        else return(res)
+    }
+
+    ## quantile function of the posterior
+    quantileFun. <- function(p) {
+        if (p == 0) {
+            res <- 0
+        } else if (p == 1) {
+            res <- 1
+        } else {
+            rootFun <- function(theta) cdf(theta) - p
+            res <- stats::uniroot(f = rootFun, interval = c(0, 1))$root
+        }
+        return(res)
+    }
+    quantileFun <- Vectorize(FUN = quantileFun.)
+
+    ## search for the shortest interval
+    optFun <- function(lowerq) {
+        width <- quantileFun(p = lowerq + level) - quantileFun(p = lowerq)
+        return(width)
+    }
+    res <- try(stats::optim(par = (1 - level)*0.5, fn = optFun, method = "L-BFGS-B",
+                            lower = 0, upper = 1 - level)$par)
+    if (inherits(res, "try-error")) {
+        CI <- c(NaN, NaN, NaN)
+    } else {
+        CI <- c(quantileFun(p = res),
+                quantileFun(p = 0.5),
+                quantileFun(p = res + level))
+    }
+
+
+    names(CI) <- c("lower", "median", "upper")
+    return(CI)
 }
