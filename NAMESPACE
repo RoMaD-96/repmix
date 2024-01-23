@@ -3,3 +3,4 @@
 export(marglik)
 export(posteriormix)
 export(thetaposteriormix)
+export(wposteriormix)

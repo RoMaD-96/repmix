@@ -105,13 +105,12 @@ marglik <- function(tr, sr, to, so, w = NULL, x = 1, y = 1, m = 0, v = 1) {
     marg1 <- stats::dnorm(x = tr, mean = to, sd = sqrt(sr^2 + so^2))
     marg2 <- stats::dnorm(x = tr, mean = m, sd = sqrt(sr^2 + v))
 
-    ## weight marginal likelihood with fixed weight
-    if (!is.null(w)) {
-        res <- w * marg1 + (1 - w) * marg2
-    } else {
-        ## weight marginal likelihood with random weight
-        res <- x / (x + y) * (marg1 - marg2) + marg2
+
+    ## a random weight is the same as a fixed weight with w = x / (x + y)
+    if (is.null(w)) {
+        w <- x / (x + y)
     }
 
+    res <- w * marg1 + (1 - w) * marg2
     return(res)
 }
