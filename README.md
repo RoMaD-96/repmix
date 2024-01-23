@@ -25,3 +25,8 @@ library("repmix")
 
 ## TODO add an example
 ```
+
+## TODO
+
+- [ ] settle naming of functions and arguments
+- [ ] implement methodology from paper
