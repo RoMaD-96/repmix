@@ -28,8 +28,9 @@ normal2mixposterior <- function(y, se, m1, v1, m2, v2, w) {
          ## priors odds
          (1 - w) / w *
          ## Bayes factor
-         stats::dnorm(x = y, mean = m1, sd = sqrt(se^2 + v1)) /
-         stats::dnorm(x = y, mean = m2, sd = sqrt(se^2 + v2))
+         stats::dnorm(x = y, mean = m2, sd = sqrt(se^2 + v2))/   
+         stats::dnorm(x = y, mean = m1, sd = sqrt(se^2 + v1))
+         
         )
     ## updated component means and variances
     v1post <- 1/(1/v1 + 1/se^2)
@@ -599,10 +600,10 @@ wposteriormix <- function(w, tr, sr, to, so, x = 1, y = 1, m = 0, v = 1) {
 }
 
 
-#' @title Highest posterior density interval for effect size
+#' @title Highest posterior density interval for the mixture weight
 #'
 #' @description This function computes the highest posterior density interval
-#'     for the effect size based on the data from original and replication study
+#'     for the mixture weight based on the data from original and replication study
 #'     using a mixture prior to incorporate the original data into the analysis
 #'     of the replication data. See the details section for details regarding
 #'     data model and prior distributions.
