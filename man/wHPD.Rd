@@ -2,7 +2,7 @@
 % Please edit documentation in R/posterior.R
 \name{wHPD}
 \alias{wHPD}
-\title{Highest posterior density interval for effect size}
+\title{Highest posterior density interval for the mixture weight}
 \usage{
 wHPD(level = 0.95, tr, sr, to, so, x = 1, y = 1, m = 0, v = 1)
 }
@@ -34,7 +34,7 @@ The highest posterior density interval at the specified credibility
 }
 \description{
 This function computes the highest posterior density interval
-    for the effect size based on the data from original and replication study
+    for the mixture weight based on the data from original and replication study
     using a mixture prior to incorporate the original data into the analysis
     of the replication data. See the details section for details regarding
     data model and prior distributions.

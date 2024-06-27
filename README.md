@@ -21,6 +21,8 @@ remotes::install_github(repo = "SamCH93/repmix")
 ```
 
 ## Usage
+The code below illustrates an example analysis of a replication study using the
+package.
 
 ``` r
 library("repmix")
@@ -40,6 +42,20 @@ y <- 1
 ## vague normal prior for non-informative mixture component
 m <- 0
 v <- 4
+
+## compute 95% HPD credible intervals for mixture weight
+wHPD(level = 0.95, tr = tr, sr = sr, to = to, so = so, x = x, y = y, m = m, 
+     v = v)
+     
+#>     lower    median     upper 
+#> 0.1382110 0.6649712 1.0000000 
+
+## compute 95% HPD credible intervals for effect size
+thetaHPD(level = 0.95, tr = tr, sr = sr, to = to, so = so, x = x, y = y, 
+         m = m, v = v)
+         
+#>        lower       median        upper 
+#> -0.003667578  0.097993140  0.198979243 
 
 ## compute joint and marginal posterior densities
 ngrid <- 200
