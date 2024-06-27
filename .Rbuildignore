@@ -3,3 +3,4 @@ LICENSE
 .gitignore
 Makefile
 out/
+posterior.png
