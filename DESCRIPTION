@@ -1,25 +1,26 @@
 Package: repmix
-Version: 0.1
-Date: 2024-06-27
+Version: 0.2
+Date: 2025-09-10
 Authors@R:
-    c(person(given = "Samuel",
-           family = "Pawel",
+    c(person(given = "Roberto",
+           family = "Macrì Demartino",
            role = c("aut", "cre"),
-           email = "samuel.pawel@uzh.ch",
-           comment = c(ORCID = "0000-0003-2779-320X")),
-      person(given = "Roberto",
-           family = "Macri Demartino",
+           email = "roberto.macridemartino@deams.units.it",
+           comment = c(ORCID = "0000-0002-5296-6566")),
+    person(given = "Samuel",
+           family = "Pawel",
            role = c("aut"),
-           email = "roberto.macridemartino@studenti.unipd.it"))
-Author: Samuel Pawel [aut, cre] (<https://orcid.org/0000-0003-2779-320X>), Roberto Macri Demartino [aut]
-Maintainer: Samuel Pawel <samuel.pawel@uzh.ch>
+           email = "samuel.pawel@uzh.ch",
+           comment = c(ORCID = "0000-0003-2779-320X")))
+Author: Roberto Macrì Demartino [aut, cre] (<https://orcid.org/0000-0002-5296-6566>), Samuel Pawel [aut] (<https://orcid.org/0000-0003-2779-320X>)
+Maintainer: Roberto Macrì Demartino <roberto.macridemartino@deams.units.it>
 Title: Analysis of Replication Studies using Mixture Priors
-Description: Provides functionality for Bayesian analysis of replication studies using mixture prior approaches.
+Description: Provides functionality for Bayesian analysis of replication studies using mixture prior approaches as propsed in Macrì Demartino et al. (2024) <doi:10.48550/arXiv.2406.19152>.
 License: GPL-3
 Encoding: UTF-8
 Imports:
 Suggests: roxygen2, tinytest
 NeedsCompilation: no
-RoxygenNote: 7.3.1
-URL: https://github.com/SamCH93/repmix
-BugReports: https://github.com/SamCH93/repmix/issues
+RoxygenNote: 7.3.2
+URL: https://github.com/RoMaD-96/repmix
+BugReports: https://github.com/RoMaD-96/repmix/issues

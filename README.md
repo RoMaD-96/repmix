@@ -5,9 +5,7 @@ based on data from an original study and its replication using a mixture prior
 framework. For more information, see the upcoming preprint
 
 Macrì Demartino, R., Egidi, L., Held, L., Pawel, S. (2024). Mixture priors for
-replication studies. 
-
-<!-- TODO add link to preprint -->
+replication studies. <https://doi.org/10.48550/arXiv.2406.19152>
 
 ## Installation
 
@@ -17,7 +15,7 @@ replication studies.
 
 ## from GitHub
 ## install.packages("remotes") # requires remotes package
-remotes::install_github(repo = "SamCH93/repmix")
+remotes::install_github(repo = "RoMaD-96/repmix")
 ```
 
 ## Usage

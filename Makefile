@@ -5,7 +5,7 @@
 ## ----------------------------------------------------------------------------
 
 PACKAGE = repmix
-VERSION = 0.1
+VERSION = 0.2
 TAR = $(PACKAGE)_$(VERSION).tar.gz
 
 all: build
